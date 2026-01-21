@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)" opacity="0.95"/>
+  
+  <!-- Code brackets on left -->
+  <g stroke="white" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M 25 35 L 20 50 L 25 65"/>
+    <path d="M 75 35 L 80 50 L 75 65"/>
+  </g>
+  
+  <!-- Design element in center (circle with dot) -->
+  <circle cx="50" cy="50" r="12" fill="none" stroke="white" stroke-width="2"/>
+  <circle cx="50" cy="50" r="3" fill="white"/>
+  
+  <!-- Accent line -->
+  <line x1="40" y1="50" x2="60" y2="50" stroke="white" stroke-width="2" opacity="0.7"/>
+</svg>
