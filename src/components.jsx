@@ -20,7 +20,6 @@ export function Navbar() {
     { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
     { label: 'Portfolio', path: '/portfolio' },
-    { label: 'Pricing', path: '/pricing' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -135,7 +134,6 @@ export function Footer() {
               <li><a href="/" className="hover:text-white transition-colors">Home</a></li>
               <li><a href="/services" className="hover:text-white transition-colors">Services</a></li>
               <li><a href="/portfolio" className="hover:text-white transition-colors">Portfolio</a></li>
-              <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
             </ul>
           </div>
 
@@ -241,55 +239,6 @@ export function PortfolioCard({ item, onViewDetails }) {
   );
 }
 
-// Pricing Card component
-export function PricingCard({ plan, onSelect }) {
-  return (
-    <div className={`rounded-lg overflow-hidden transition-all transform hover:scale-105 ${
-      plan.featured 
-        ? 'bg-gradient-to-br from-blue-600 to-blue-700 ring-2 ring-blue-400 scale-105' 
-        : 'bg-slate-800 border border-slate-700'
-    }`}>
-      <div className="p-8">
-        {plan.featured && <div className="text-blue-200 text-xs font-bold mb-2">⭐ MOST POPULAR</div>}
-        <h3 className={`font-bold text-2xl mb-2 ${plan.featured ? 'text-white' : 'text-white'}`}>
-          {plan.name}
-        </h3>
-        <p className={`text-sm mb-6 ${plan.featured ? 'text-blue-100' : 'text-slate-400'}`}>
-          {plan.description}
-        </p>
-        <div className="mb-6">
-          <span className={`text-3xl font-bold ${plan.featured ? 'text-white' : 'text-blue-400'}`}>
-            {plan.startingPrice}
-          </span>
-          {plan.startingPrice !== "Let's Talk" && <span className={`text-sm ml-2 ${plan.featured ? 'text-blue-100' : 'text-slate-400'}`}>
-            + VAT
-          </span>}
-        </div>
-        <p className={`text-xs mb-6 ${plan.featured ? 'text-blue-100' : 'text-slate-400'}`}>
-          ⏱️ Delivery: {plan.deliveryDays}
-        </p>
-        <ul className="space-y-3 mb-8">
-          {plan.features.map((feature, idx) => (
-            <li key={idx} className={`text-sm flex items-start ${plan.featured ? 'text-blue-50' : 'text-slate-300'}`}>
-              <span className="mr-3">✓</span>
-              <span>{feature}</span>
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() => onSelect(plan)}
-          className={`w-full py-3 rounded-lg font-bold transition-all ${
-            plan.featured
-              ? 'bg-white text-blue-600 hover:bg-blue-50'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-          }`}
-        >
-          {plan.cta}
-        </button>
-      </div>
-    </div>
-  );
-}
 
 // Testimonial Card component
 export function TestimonialCard({ testimonial }) {

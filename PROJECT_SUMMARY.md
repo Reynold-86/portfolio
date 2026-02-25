@@ -15,7 +15,6 @@ portfolio/
 │   │   ├── HomePage.jsx           ✅ Landing page with hero section
 │   │   ├── ServicesPage.jsx       ✅ Services showcase
 │   │   ├── PortfolioPage.jsx      ✅ Project gallery with filtering
-│   │   ├── PricingPage.jsx        ✅ Pricing tiers & comparison
 │   │   ├── AboutPage.jsx          ✅ About me & journey
 │   │   └── ContactPage.jsx        ✅ Lead capture form
 │   ├── components.jsx             ✅ 10+ reusable components
@@ -40,11 +39,10 @@ portfolio/
 
 ## 🎯 Core Features Implemented
 
-### Pages (6 Total)
+### Pages (5 Total)
 - ✅ **Home** - Hero, stats, services preview, CTAs
 - ✅ **Services** - Complete service listings, process, tech stack
 - ✅ **Portfolio** - Filterable gallery, project modals, case studies
-- ✅ **Pricing** - 4 tiers, comparison table, FAQs, add-ons
 - ✅ **About** - Bio, timeline, skills, values, achievements
 - ✅ **Contact** - Form, social links, FAQ, success message
 
@@ -55,7 +53,6 @@ portfolio/
 - ✅ CTAButton (customizable)
 - ✅ ServiceCard
 - ✅ PortfolioCard
-- ✅ PricingCard
 - ✅ TestimonialCard
 - ✅ LeadForm
 - ✅ Section wrapper
@@ -65,7 +62,6 @@ portfolio/
 - ✅ Personal information
 - ✅ 2 service categories (Web Dev + Graphic Design)
 - ✅ 6 example portfolio projects
-- ✅ 4 pricing tiers with features
 - ✅ 4 client testimonials
 - ✅ Skills by category
 - ✅ Stats and trust markers
@@ -90,7 +86,6 @@ portfolio/
 - ✅ Trust markers
 - ✅ Testimonials
 - ✅ Stats display
-- ✅ Pricing comparison
 - ✅ Service descriptions
 
 ### Technical Features

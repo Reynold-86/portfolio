@@ -6,16 +6,6 @@ import { personalInfo } from '../content';
 export function ContactPage() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null);
-
-  // Get plan from localStorage if user came from pricing page
-  useState(() => {
-    const plan = localStorage.getItem('selectedPlan');
-    if (plan) {
-      setSelectedPlan(JSON.parse(plan));
-      localStorage.removeItem('selectedPlan');
-    }
-  }, []);
 
   const handleFormSubmit = (formData) => {
     // In a real application, you would send this to a backend service
@@ -111,13 +101,6 @@ Message: ${formData.message}
             </div>
           ) : (
             <div className="bg-slate-700 p-8 rounded-lg border border-slate-600">
-              {selectedPlan && (
-                <div className="mb-6 p-4 bg-blue-900 border border-blue-600 rounded-lg">
-                  <p className="text-blue-200 text-sm">
-                    📋 Selected Plan: <span className="font-bold">{selectedPlan.name}</span>
-                  </p>
-                </div>
-              )}
               <LeadForm onSubmit={handleFormSubmit} />
             </div>
           )}

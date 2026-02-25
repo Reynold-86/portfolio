@@ -30,7 +30,7 @@ export const personalInfo = {
 Then scroll down and update:
 - **Services** - Add/remove your services
 - **Portfolio** - Add your projects
-- **Pricing** - Set your prices
+
 - **Testimonials** - Add client reviews
 - **Skills** - List your technologies
 
@@ -93,13 +93,13 @@ git push
 
 ## 📋 What You Have
 
-✅ 6 complete pages
+✅ 5 complete pages
 ✅ Mobile responsive  
 ✅ Dark mode design
 ✅ WhatsApp integration
 ✅ Lead capture form
 ✅ Portfolio filtering
-✅ Pricing tiers
+
 ✅ Testimonials
 ✅ Fast & optimized
 ✅ Ready to deploy

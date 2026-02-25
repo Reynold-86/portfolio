@@ -18,7 +18,7 @@ A modern, conversion-focused portfolio website for showcasing web development an
 - **Accessible** - WCAG compliance, keyboard navigation
 
 ### 📱 Functionality
-- **6 Pages** - Home, Services, Portfolio, Pricing, About, Contact
+- **5 Pages** - Home, Services, Portfolio, About, Contact
 - **Lead Capture Form** - Collect inquiries with service and budget info
 - **Floating WhatsApp Button** - Direct messaging CTA always visible
 - **Portfolio Filtering** - Filter by Web Development or Graphic Design
@@ -37,7 +37,7 @@ A modern, conversion-focused portfolio website for showcasing web development an
 
 ### 💼 Business Features
 - **Conversion Optimized** - Multiple CTAs, clear value proposition
-- **Pricing Tiers** - 4 packages with add-on options
+- **Custom Estimates** - Tailored quotes upon request
 - **Testimonials** - Social proof from satisfied clients
 - **Stats Display** - Showcase your achievements
 - **Service Showcase** - Clear description of offerings
@@ -167,9 +167,6 @@ export const portfolio = [
 ];
 ```
 
-### Update Pricing
-
-Edit `pricing` array in `src/content.js` - customize packages, prices, and features.
 
 ### Change Colors
 
@@ -184,7 +181,6 @@ Edit `tailwind.config.js` to customize the dark slate color scheme.
 | **Home** | Landing page with hero, stats, CTAs |
 | **Services** | Web dev and graphic design offerings |
 | **Portfolio** | Filterable project gallery |
-| **Pricing** | 4 pricing tiers with comparison |
 | **About** | Your story, skills, achievements |
 | **Contact** | Lead capture form + socials |
 
@@ -192,7 +188,7 @@ Edit `tailwind.config.js` to customize the dark slate color scheme.
 
 ## 🎁 What's Included
 
-✅ 6 complete pages
+✅ 5 complete pages
 ✅ 10+ reusable components
 ✅ 25+ example items
 ✅ Mobile responsive
@@ -206,7 +202,7 @@ Edit `tailwind.config.js` to customize the dark slate color scheme.
 
 ## 💡 Pro Tips
 
-- **Update regularly** - Add new projects, testimonials, pricing changes
+- **Update regularly** - Add new projects, testimonials, content changes
 - **Use quality images** - Free sources: Unsplash, Pexels
 - **Add Google Analytics** - Track which CTAs convert best
 - **Keep it fresh** - Update content every few months

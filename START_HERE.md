@@ -8,13 +8,12 @@ I've built you a **professional, production-ready portfolio website** that's con
 
 ## 📦 What You're Getting
 
-### ✨ Complete Website with 6 Pages
+### ✨ Complete Website with 5 Pages
 1. **Home** - Hero landing page with CTAs
 2. **Services** - Web Dev & Graphic Design services  
 3. **Portfolio** - Filterable project gallery with case studies
-4. **Pricing** - 4 pricing tiers with comparison
-5. **About** - Your story, skills, and achievements
-6. **Contact** - Lead capture form + social links
+4. **About** - Your story, skills, and achievements
+5. **Contact** - Lead capture form + social links
 
 ### 🎯 Conversion Features
 - ✅ WhatsApp button (floating + in navbar)
@@ -45,7 +44,7 @@ Edit **`src/content.js`** and update:
 - Your name, email, WhatsApp
 - Your services
 - Your portfolio projects
-- Your pricing
+
 - Your skills
 - Your testimonials
 
@@ -83,7 +82,7 @@ Your site goes live instantly!
 - ✅ React Router for pages
 - ✅ Tailwind CSS styling
 - ✅ 10+ reusable components
-- ✅ 6 complete pages
+- ✅ 5 complete pages
 - ✅ Central content.js file
 
 ### Design
@@ -99,7 +98,7 @@ Your site goes live instantly!
 - ✅ Lead capture form
 - ✅ WhatsApp integration
 - ✅ Service showcase
-- ✅ Pricing tiers
+
 - ✅ Testimonials
 - ✅ About timeline
 
@@ -125,10 +124,10 @@ Your site goes live instantly!
 
 ## 📊 Quick Stats
 
-- **6 Pages** - All built and styled
+- **5 Pages** - All built and styled
 - **10+ Components** - Reusable and efficient
 - **6 Portfolio Projects** - Example included
-- **4 Pricing Tiers** - Ready to customize
+
 - **20+ CTAs** - Conversion optimized
 - **Mobile Responsive** - Works everywhere
 - **Production Ready** - Deploy immediately
@@ -161,7 +160,7 @@ Your site goes live instantly!
 ### ✅ Business Ready
 - Portfolio showcase
 - Service descriptions
-- Pricing tiers
+
 - Testimonials
 - About/credentials
 

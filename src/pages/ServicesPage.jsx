@@ -125,12 +125,7 @@ export function ServicesPage() {
             >
               Get a Free Consultation
             </button>
-            <button
-              onClick={() => navigate('/pricing')}
-              className="px-8 py-4 bg-blue-700 text-white rounded-lg hover:bg-blue-800 font-bold transition-all"
-            >
-              View Pricing Plans
-            </button>
+
           </div>
         </div>
       </Section>

@@ -143,9 +143,6 @@ export function HomePage() {
             <CTAButton onClick={handleGetStarted} className="px-8 py-4 text-lg bg-white text-blue-600 hover:bg-blue-50">
               Get Started
             </CTAButton>
-            <CTAButton onClick={() => navigate('/pricing')} className="px-8 py-4 text-lg bg-blue-700 text-white hover:bg-blue-800">
-              View Pricing
-            </CTAButton>
           </div>
         </div>
       </Section>

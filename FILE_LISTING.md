@@ -37,7 +37,7 @@ portfolio/
 │   │   └── components.jsx        # All reusable components (10+)
 │   │                             # - Navbar, Footer
 │   │                             # - ServiceCard, PortfolioCard
-│   │                             # - PricingCard, TestimonialCard
+│   │                             # - TestimonialCard
 │   │                             # - LeadForm, CTAButton
 │   │                             # - FloatingWhatsAppButton
 │   │                             # - Section, SectionHeading
@@ -46,7 +46,6 @@ portfolio/
 │   │   ├── HomePage.jsx          # Landing page
 │   │   ├── ServicesPage.jsx      # Services showcase
 │   │   ├── PortfolioPage.jsx     # Project gallery
-│   │   ├── PricingPage.jsx       # Pricing tiers
 │   │   ├── AboutPage.jsx         # About me
 │   │   └── ContactPage.jsx       # Lead capture
 │   │
@@ -201,7 +200,6 @@ portfolio/
 - Personal information
 - Services list
 - Portfolio projects
-- Pricing tiers
 - Testimonials
 - Skills
 - Stats & trust markers
@@ -215,7 +213,6 @@ portfolio/
   - CTAButton
   - ServiceCard
   - PortfolioCard
-  - PricingCard
   - TestimonialCard
   - LeadForm
   - Section wrapper
@@ -249,8 +246,6 @@ portfolio/
 - Case study format
 - **Edit to:** Change portfolio layout, add filtering logic
 
-#### `src/pages/PricingPage.jsx`
-- Pricing tiers
 - Comparison table
 - FAQ section
 - Add-ons list
@@ -341,7 +336,6 @@ Gzipped:           ~85KB (production)
 | Your personal info | `src/content.js` lines 1-11 |
 | Services | `src/content.js` lines 13-68 |
 | Portfolio projects | `src/content.js` lines 70-170 |
-| Pricing | `src/content.js` lines 172-260 |
 | Testimonials | `src/content.js` lines 262-290 |
 | Navbar component | `src/components.jsx` lines 6-100 |
 | Portfolio filtering | `src/pages/PortfolioPage.jsx` lines 1-30 |
@@ -384,8 +378,7 @@ App.jsx
       ├── HomePage.jsx → content.js
       ├── ServicesPage.jsx → content.js
       ├── PortfolioPage.jsx → content.js, components.jsx
-      ├── PricingPage.jsx → content.js, components.jsx
-      ├── AboutPage.jsx → content.js, components.jsx
+            ├── AboutPage.jsx → content.js, components.jsx
       └── ContactPage.jsx → content.js, components.jsx
 
 CSS:
