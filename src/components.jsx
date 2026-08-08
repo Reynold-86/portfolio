@@ -1,31 +1,59 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { personalInfo } from './content.js';
+
+// Decorative blurred gradient blobs used behind page content for depth
+export function BackgroundBlobs() {
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+      <div className="bg-blob w-96 h-96 -top-20 -left-20 bg-blue-600/25 animate-blob" />
+      <div className="bg-blob w-96 h-96 top-1/3 -right-20 bg-purple-600/20 animate-blob" style={{ animationDelay: '4s' }} />
+      <div className="bg-blob w-96 h-96 bottom-0 left-1/3 bg-cyan-500/15 animate-blob" style={{ animationDelay: '8s' }} />
+    </div>
+  );
+}
+
+// Floating scroll-to-top widget, appears once the user scrolls past the hero
+export function BackToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > 500);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Back to top"
+      className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-strong shadow-glow-blue text-blue-300 hover:text-white hover:bg-blue-600/80 transition-all duration-300 flex items-center justify-center ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+  );
+}
 
 // Navigation bar with sticky positioning and CTA buttons
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleWhatsApp = () => {
-    const message = "Hi Reynold, I'm interested in your services. Can we discuss?";
-    const encodedMessage = encodeURIComponent(message);
-    window.open(
-      `https://wa.me/${personalInfo.whatsapp}?text=${encodedMessage}`,
-      '_blank'
-    );
-  };
+  const location = useLocation();
 
   const navLinks = [
     { label: 'Home', path: '/' },
-    { label: 'Services', path: '/services' },
-    { label: 'Portfolio', path: '/portfolio' },
     { label: 'About', path: '/about' },
+    { label: 'Experience', path: '/experience' },
+    { label: 'Projects', path: '/projects' },
     { label: 'Contact', path: '/contact' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800 shadow-lg">
+    <nav className="sticky top-0 z-50 glass-strong shadow-glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -34,36 +62,49 @@ export function Navbar() {
             className="flex items-center space-x-2 font-bold text-xl text-white hover:text-blue-400 transition-colors"
           >
             <span className="text-2xl">💻</span>
-            <span>Reynold</span>
+            <span className="text-gradient">Reynold</span>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.path}
-                onClick={() => navigate(link.path)}
-                className="text-slate-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                {link.label}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link) => {
+              const active = location.pathname === link.path;
+              return (
+                <button
+                  key={link.path}
+                  onClick={() => navigate(link.path)}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                    active ? 'text-white' : 'text-slate-300 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-brand-gradient transition-transform duration-300 origin-left ${
+                      active ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  />
+                </button>
+              );
+            })}
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <button
-              onClick={handleWhatsApp}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all font-medium text-sm flex items-center space-x-2"
-            >
-              <span>💬</span>
-              <span>WhatsApp</span>
-            </button>
+            {personalInfo.resumeUrl && (
+              <a
+                href={personalInfo.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 border border-blue-500/50 text-blue-300 rounded-lg hover:bg-blue-600/20 hover:border-blue-400 transition-all font-medium text-sm"
+              >
+                Resume
+              </a>
+            )}
             <button
               onClick={() => navigate('/contact')}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-medium text-sm"
+              className="px-4 py-2 bg-brand-gradient text-white rounded-lg hover:shadow-glow-blue transition-all duration-300 font-medium text-sm hover:scale-105"
             >
-              Get Quote
+              Contact Me
             </button>
           </div>
 
@@ -84,25 +125,34 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2 border-t border-slate-800 pt-4">
-            {navLinks.map((link) => (
-              <button
-                key={link.path}
-                onClick={() => {
-                  navigate(link.path);
-                  setIsOpen(false);
-                }}
-                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+          <div className="md:hidden pb-4 space-y-2 border-t border-white/10 pt-4 animate-fade-in">
+            {navLinks.map((link) => {
+              const active = location.pathname === link.path;
+              return (
+                <button
+                  key={link.path}
+                  onClick={() => {
+                    navigate(link.path);
+                    setIsOpen(false);
+                  }}
+                  className={`block w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                    active ? 'text-white bg-white/10' : 'text-slate-300 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+            {personalInfo.resumeUrl && (
+              <a
+                href={personalInfo.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center mt-3 px-4 py-2 border border-blue-500/50 text-blue-300 rounded-lg hover:bg-blue-600/20 transition-all font-medium"
               >
-                {link.label}
-              </button>
-            ))}
-            <button
-              onClick={handleWhatsApp}
-              className="w-full mt-3 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all font-medium"
-            >
-              💬 WhatsApp
-            </button>
+                Resume
+              </a>
+            )}
           </div>
         )}
       </div>
@@ -115,7 +165,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 mt-20">
+    <footer className="relative z-10 glass border-t border-white/10 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -131,36 +181,49 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="/" className="hover:text-white transition-colors">Home</a></li>
-              <li><a href="/services" className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="/portfolio" className="hover:text-white transition-colors">Portfolio</a></li>
+              <li><a href="/" className="hover:text-blue-400 transition-colors">Home</a></li>
+              <li><a href="/about" className="hover:text-blue-400 transition-colors">About</a></li>
+              <li><a href="/projects" className="hover:text-blue-400 transition-colors">Projects</a></li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Experience */}
           <div>
-            <h4 className="font-bold text-white mb-4">Services</h4>
+            <h4 className="font-bold text-white mb-4">Experience</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="/services" className="hover:text-white transition-colors">Web Development</a></li>
-              <li><a href="/services" className="hover:text-white transition-colors">Graphic Design</a></li>
-              <li><a href="/services" className="hover:text-white transition-colors">Web Apps</a></li>
-              <li><a href="/services" className="hover:text-white transition-colors">Maintenance</a></li>
+              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Skills</a></li>
+              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Work Experience</a></li>
+              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Education</a></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h4 className="font-bold text-white mb-4">Connect</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors">📧 Email</a></li>
-              <li><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">💬 WhatsApp</a></li>
-              <li><a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">🐙 GitHub</a></li>
-              <li><a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">💼 LinkedIn</a></li>
-            </ul>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: '📧', label: 'Email', url: `mailto:${personalInfo.email}` },
+                { icon: '💬', label: 'WhatsApp', url: `https://wa.me/${personalInfo.whatsapp}` },
+                { icon: '🐙', label: 'GitHub', url: personalInfo.github },
+                { icon: '💼', label: 'LinkedIn', url: personalInfo.linkedin },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={social.label}
+                  aria-label={social.label}
+                  className="w-9 h-9 flex items-center justify-center rounded-full glass text-slate-300 hover:text-white hover:shadow-glow-sm hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <span>{social.icon}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8">
+        <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-400 text-sm">
               © {currentYear} {personalInfo.name}. All rights reserved.
@@ -178,58 +241,61 @@ export function Footer() {
 // CTA Button component (reusable)
 export function CTAButton({ children, onClick, variant = 'primary', className = '' }) {
   const variants = {
-    primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-    secondary: 'bg-green-600 hover:bg-green-700 text-white',
-    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800',
+    primary: 'bg-brand-gradient text-white hover:shadow-glow-blue',
+    secondary: 'bg-gradient-to-r from-cyan-600 to-emerald-600 text-white hover:shadow-glow-cyan',
+    outline: 'glass border border-blue-500/40 text-blue-300 hover:text-white hover:border-blue-400 hover:bg-blue-600/10',
+    // For use on top of a colored/gradient banner background
+    white: 'bg-white text-blue-600 hover:bg-blue-50 hover:shadow-2xl',
+    ghost: 'bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20',
   };
 
   return (
     <button
       onClick={onClick}
-      className={`px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 ${variants[variant]} ${className}`}
+      className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${variants[variant]} ${className}`}
     >
       {children}
     </button>
   );
 }
 
-// Service Card component
-export function ServiceCard({ icon, title, description }) {
+// Icon Card component (used for skills, values, etc.)
+export function IconCard({ icon, title, description }) {
   return (
-    <div className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all transform hover:scale-105 group">
-      <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{icon}</div>
+    <div className="glass gradient-border rounded-xl p-6 hover:shadow-glow-sm hover:-translate-y-1 transition-all duration-300 group">
+      <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{icon}</div>
       <h3 className="font-bold text-white mb-2 text-lg">{title}</h3>
       <p className="text-slate-400 text-sm">{description}</p>
     </div>
   );
 }
 
-// Portfolio Card component
-export function PortfolioCard({ item, onViewDetails }) {
+// Project Card component
+export function ProjectCard({ item, onViewDetails }) {
   return (
-    <div className="bg-slate-800 rounded-lg overflow-hidden hover:shadow-2xl transition-all group cursor-pointer"
+    <div className="glass gradient-border rounded-xl overflow-hidden hover:shadow-glow-sm hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
          onClick={() => onViewDetails(item)}>
       <div className="relative overflow-hidden h-48 bg-slate-700">
         <img
           src={item.image}
           alt={item.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span className="text-white font-bold">View Details</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <span className="text-white font-bold px-4 py-1.5 rounded-full glass-strong text-sm">View Details</span>
         </div>
       </div>
       <div className="p-6">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-2 gap-2">
           <h3 className="font-bold text-white">{item.title}</h3>
-          <span className="text-xs bg-blue-600 text-white px-3 py-1 rounded-full">
+          <span className="text-xs bg-brand-gradient text-white px-3 py-1 rounded-full whitespace-nowrap">
             {item.category}
           </span>
         </div>
         <p className="text-slate-400 text-sm">{item.description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {item.tools.slice(0, 3).map((tool, idx) => (
-            <span key={idx} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">
+            <span key={idx} className="text-xs bg-white/5 border border-white/10 text-slate-300 px-2 py-1 rounded">
               {tool}
             </span>
           ))}
@@ -240,38 +306,12 @@ export function PortfolioCard({ item, onViewDetails }) {
 }
 
 
-// Testimonial Card component
-export function TestimonialCard({ testimonial }) {
-  return (
-    <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-      <div className="flex items-center mb-4">
-        <img
-          src={testimonial.image}
-          alt={testimonial.name}
-          className="w-12 h-12 rounded-full mr-4 object-cover"
-        />
-        <div>
-          <h4 className="font-bold text-white">{testimonial.name}</h4>
-          <p className="text-sm text-slate-400">{testimonial.business}</p>
-        </div>
-      </div>
-      <div className="flex items-center mb-4">
-        {[...Array(testimonial.rating)].map((_, i) => (
-          <span key={i} className="text-yellow-400 text-sm">⭐</span>
-        ))}
-      </div>
-      <p className="text-slate-300 italic">"{testimonial.text}"</p>
-    </div>
-  );
-}
-
-// Lead Capture Form component
-export function LeadForm({ onSubmit }) {
+// Contact Form component
+export function ContactForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: '',
-    budget: '',
+    reason: '',
     message: '',
   });
 
@@ -283,8 +323,10 @@ export function LeadForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ name: '', email: '', service: '', budget: '', message: '' });
+    setFormData({ name: '', email: '', reason: '', message: '' });
   };
+
+  const fieldClass = "w-full px-4 py-3 bg-white/5 text-white border border-white/10 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 focus:bg-white/[0.07] transition-all";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -295,7 +337,7 @@ export function LeadForm({ onSubmit }) {
         value={formData.name}
         onChange={handleChange}
         required
-        className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+        className={fieldClass}
       />
       <input
         type="email"
@@ -304,44 +346,32 @@ export function LeadForm({ onSubmit }) {
         value={formData.email}
         onChange={handleChange}
         required
-        className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+        className={fieldClass}
       />
       <select
-        name="service"
-        value={formData.service}
+        name="reason"
+        value={formData.reason}
         onChange={handleChange}
-        required
-        className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+        className={fieldClass}
       >
-        <option value="">Select a Service</option>
-        <option value="web-dev">Web Development</option>
-        <option value="graphic-design">Graphic Design</option>
-        <option value="both">Both Services</option>
-      </select>
-      <select
-        name="budget"
-        value={formData.budget}
-        onChange={handleChange}
-        className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-      >
-        <option value="">Select Budget Range</option>
-        <option value="under-500">Under $500</option>
-        <option value="500-1000">$500 - $1,000</option>
-        <option value="1000-5000">$1,000 - $5,000</option>
-        <option value="5000-plus">$5,000+</option>
+        <option value="">Reason for contacting (optional)</option>
+        <option value="job-opportunity">Job Opportunity</option>
+        <option value="internship">Internship</option>
+        <option value="freelance">Freelance / Contract Work</option>
+        <option value="other">Other</option>
       </select>
       <textarea
         name="message"
-        placeholder="Tell me about your project..."
+        placeholder="Your message..."
         value={formData.message}
         onChange={handleChange}
         rows="4"
         required
-        className="w-full px-4 py-3 bg-slate-800 text-white border border-slate-700 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 resize-none"
+        className={`${fieldClass} resize-none`}
       />
       <button
         type="submit"
-        className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-bold"
+        className="w-full px-6 py-3 bg-brand-gradient text-white rounded-lg hover:shadow-glow-blue transition-all duration-300 font-bold hover:scale-[1.02]"
       >
         Send Message
       </button>
@@ -349,26 +379,53 @@ export function LeadForm({ onSubmit }) {
   );
 }
 
-// Floating WhatsApp Button
-export function FloatingWhatsAppButton() {
-  const handleClick = () => {
-    const message = "Hi Reynold, I'm interested in your services. Can we discuss?";
-    const encodedMessage = encodeURIComponent(message);
-    window.open(
-      `https://wa.me/${personalInfo.whatsapp}?text=${encodedMessage}`,
-      '_blank'
-    );
+// Copy-to-clipboard button, shows a brief "Copied!" confirmation
+export function CopyButton({ value, label = 'Copy' }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API unavailable — silently ignore
+    }
   };
 
   return (
     <button
-      onClick={handleClick}
-      className="fixed bottom-6 right-6 bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all transform hover:scale-110 z-40 text-3xl"
-      title="Chat with us on WhatsApp"
-      aria-label="WhatsApp"
+      onClick={handleCopy}
+      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:border-blue-400/50 transition-all duration-300"
     >
-      💬
+      <span>{copied ? '✓' : '📋'}</span>
+      <span>{copied ? 'Copied!' : label}</span>
     </button>
+  );
+}
+
+// Accordion item — click to expand/collapse
+export function AccordionItem({ question, answer, isOpen, onToggle }) {
+  return (
+    <div className="glass rounded-xl overflow-hidden transition-all duration-300 hover:border-blue-400/30">
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
+      >
+        <h4 className="font-bold text-white">{question}</h4>
+        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-white/5 text-blue-300 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
+          +
+        </span>
+      </button>
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <p className="text-slate-400 text-sm px-6 pb-5">{answer}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 

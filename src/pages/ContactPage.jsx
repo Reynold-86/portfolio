@@ -1,32 +1,47 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LeadForm, Section, SectionHeading } from '../components';
+import { ContactForm, Section, SectionHeading, CopyButton, AccordionItem } from '../components';
 import { personalInfo } from '../content';
+
+const faqs = [
+  {
+    q: 'How quickly do you respond?',
+    a: 'I aim to respond to all messages within 24 hours.'
+  },
+  {
+    q: 'Are you open to relocation?',
+    a: "Yes, I'm open to discussing remote, hybrid, or relocation opportunities depending on the role."
+  },
+  {
+    q: 'Are you available for internships?',
+    a: "Yes! I'm open to internships as well as full-time and contract roles."
+  },
+  {
+    q: 'Can I see more of your work?',
+    a: 'Absolutely — check out the Projects page, or reach out and I can share more examples directly.'
+  },
+];
 
 export function ContactPage() {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
 
   const handleFormSubmit = (formData) => {
     // In a real application, you would send this to a backend service
     console.log('Form submitted:', formData);
 
-    // Prepare email content
     const emailContent = `
 Name: ${formData.name}
 Email: ${formData.email}
-Service: ${formData.service}
-Budget: ${formData.budget}
+Reason: ${formData.reason || 'Not specified'}
 Message: ${formData.message}
     `.trim();
 
-    // Create mailto link (fallback if no backend)
-    const mailtoLink = `mailto:${personalInfo.email}?subject=New Portfolio Inquiry&body=${encodeURIComponent(emailContent)}`;
+    const mailtoLink = `mailto:${personalInfo.email}?subject=Portfolio Contact&body=${encodeURIComponent(emailContent)}`;
 
-    // Show success message
     setSubmitted(true);
     setTimeout(() => {
-      // Optionally open email client or redirect
       window.location.href = mailtoLink;
     }, 1500);
   };
@@ -34,56 +49,59 @@ Message: ${formData.message}
   return (
     <div className="min-h-full">
       {/* Hero Section */}
-      <Section className="bg-gradient-to-b from-slate-900 to-slate-800 py-20">
+      <Section className="bg-grid py-20">
         <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-white">Get In Touch</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-white">Get In <span className="text-gradient">Touch</span></h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Ready to discuss your project? Let's connect and create something great together.
+            Have an opportunity in mind? I'd love to hear from you.
           </p>
         </div>
       </Section>
 
       {/* Contact Section */}
       <Section>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
           {/* Contact Info Cards */}
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-8 text-white hover:shadow-xl transition-all">
+          <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-blue transition-all duration-300">
             <div className="text-4xl mb-4">📧</div>
-            <h3 className="text-xl font-bold mb-2">Email</h3>
-            <a href={`mailto:${personalInfo.email}`} className="text-blue-100 hover:text-white">
+            <h3 className="text-xl font-bold text-white mb-2">Email</h3>
+            <a href={`mailto:${personalInfo.email}`} className="text-blue-300 hover:text-white break-all">
               {personalInfo.email}
             </a>
+            <div className="mt-3">
+              <CopyButton value={personalInfo.email} label="Copy email" />
+            </div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-lg p-8 text-white hover:shadow-xl transition-all">
-            <div className="text-4xl mb-4">💬</div>
-            <h3 className="text-xl font-bold mb-2">WhatsApp</h3>
+          <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-purple transition-all duration-300">
+            <div className="text-4xl mb-4">💼</div>
+            <h3 className="text-xl font-bold text-white mb-2">LinkedIn</h3>
             <a
-              href={`https://wa.me/${personalInfo.whatsapp}`}
+              href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-green-100 hover:text-white"
+              className="text-purple-300 hover:text-white"
             >
-              Chat with me
+              Connect with me
             </a>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-600 to-purple-700 rounded-lg p-8 text-white hover:shadow-xl transition-all">
+          <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-cyan transition-all duration-300">
             <div className="text-4xl mb-4">📍</div>
-            <h3 className="text-xl font-bold mb-2">Location</h3>
-            <p className="text-purple-100">{personalInfo.location}</p>
-            <p className="text-purple-100 text-sm mt-2">Local & Remote Clients</p>
+            <h3 className="text-xl font-bold text-white mb-2">Location</h3>
+            <p className="text-slate-300">{personalInfo.location}</p>
+            <p className="text-slate-400 text-sm mt-2">Open to remote & relocation</p>
           </div>
         </div>
       </Section>
 
       {/* Main Contact Form Section */}
-      <Section className="bg-slate-800">
+      <Section>
         <div className="max-w-2xl mx-auto">
           <SectionHeading title="Send me a Message" center={true} />
 
           {submitted ? (
-            <div className="bg-green-600/20 border border-green-600 rounded-lg p-8 text-center">
+            <div className="glass border border-green-500/30 rounded-xl p-8 text-center animate-fade-in">
               <div className="text-5xl mb-4">✓</div>
               <h3 className="text-2xl font-bold text-green-400 mb-2">Message Sent!</h3>
               <p className="text-slate-300 mb-6">
@@ -94,14 +112,14 @@ Message: ${formData.message}
                   setSubmitted(false);
                   navigate('/');
                 }}
-                className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
+                className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all"
               >
                 Back to Home
               </button>
             </div>
           ) : (
-            <div className="bg-slate-700 p-8 rounded-lg border border-slate-600">
-              <LeadForm onSubmit={handleFormSubmit} />
+            <div className="glass gradient-border p-8 rounded-xl">
+              <ContactForm onSubmit={handleFormSubmit} />
             </div>
           )}
         </div>
@@ -109,11 +127,11 @@ Message: ${formData.message}
 
       {/* Social Links */}
       <Section>
-        <SectionHeading title="Connect With Me" subtitle="Follow or connect on social media" />
-        <div className="flex flex-wrap justify-center gap-6">
+        <SectionHeading title="Connect With Me" subtitle="Find me on other platforms" />
+        <div className="flex flex-wrap justify-center gap-4">
           {[
-            { icon: '🐙', label: 'GitHub', url: personalInfo.github },
             { icon: '💼', label: 'LinkedIn', url: personalInfo.linkedin },
+            { icon: '🐙', label: 'GitHub', url: personalInfo.github },
             { icon: '🎨', label: 'Behance', url: personalInfo.behance },
             { icon: '💬', label: 'WhatsApp', url: `https://wa.me/${personalInfo.whatsapp}` },
           ].map((social, idx) => (
@@ -122,7 +140,7 @@ Message: ${formData.message}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-all transform hover:scale-105"
+              className="flex items-center gap-2 px-6 py-3 glass gradient-border text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-glow-sm"
             >
               <span className="text-2xl">{social.icon}</span>
               <span className="font-semibold">{social.label}</span>
@@ -132,50 +150,18 @@ Message: ${formData.message}
       </Section>
 
       {/* FAQ Section */}
-      <Section className="bg-slate-800">
-        <SectionHeading title="Quick FAQ" subtitle="Common questions about working with me" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {
-              q: 'How quickly do you respond?',
-              a: 'I aim to respond to all inquiries within 24 hours. For urgent matters, WhatsApp is usually faster.'
-            },
-            {
-              q: 'Do you offer free consultations?',
-              a: 'Yes! I offer a free 30-minute consultation to discuss your project, goals, and how I can help.'
-            },
-            {
-              q: 'What\'s your typical project timeline?',
-              a: 'Depends on complexity. Starter projects: 5-7 days. Larger projects: 3-4 weeks. We discuss timelines upfront.'
-            },
-            {
-              q: 'Do you work with teams?',
-              a: 'Yes! I can work directly with your team or collaborate with other agencies on larger projects.'
-            },
-            {
-              q: 'Can you redesign my existing website?',
-              a: 'Absolutely! I can audit, redesign, or rebuild your existing website to improve performance and conversions.'
-            },
-            {
-              q: 'What\'s your revision policy?',
-              a: 'Multiple revisions are included in the development process. I work until you\'re satisfied with the result.'
-            },
-          ].map((item, idx) => (
-            <div key={idx} className="bg-slate-700 p-6 rounded-lg">
-              <h4 className="font-bold text-white mb-2">{item.q}</h4>
-              <p className="text-slate-400 text-sm">{item.a}</p>
-            </div>
+      <Section>
+        <SectionHeading title="Quick FAQ" subtitle="Common questions" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+          {faqs.map((item, idx) => (
+            <AccordionItem
+              key={idx}
+              question={item.q}
+              answer={item.a}
+              isOpen={openFaq === idx}
+              onToggle={() => setOpenFaq(openFaq === idx ? -1 : idx)}
+            />
           ))}
-        </div>
-      </Section>
-
-      {/* Final CTA */}
-      <Section className="bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="text-center space-y-6">
-          <h2 className="text-4xl font-bold text-white">Let's get started!</h2>
-          <p className="text-xl text-blue-100">
-            Don't wait. Reach out now and let's discuss how I can help your business grow.
-          </p>
         </div>
       </Section>
     </div>
