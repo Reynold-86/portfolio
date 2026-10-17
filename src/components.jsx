@@ -203,6 +203,7 @@ export function Footer() {
             <div className="flex flex-wrap gap-2">
               {[
                 { icon: '📧', label: 'Email', url: `mailto:${personalInfo.email}` },
+                { icon: '📱', label: 'Phone', url: `tel:${personalInfo.phone}` },
                 { icon: '💬', label: 'WhatsApp', url: `https://wa.me/${personalInfo.whatsapp}` },
                 { icon: '🐙', label: 'GitHub', url: personalInfo.github },
                 { icon: '💼', label: 'LinkedIn', url: personalInfo.linkedin },

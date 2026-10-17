@@ -7,7 +7,8 @@ export const personalInfo = {
   location: 'Zimbabwe',
   bio: 'IT-minded professional with a background in Information Technology, comfortable across technical support, web development, graphic design, and sales & marketing — looking for an opportunity to bring that range to a team.',
   tagline: "I'm currently open to new opportunities in IT support, development, design, or sales & marketing — full-time, internship, or contract.",
-  email: 'usurper3320799@gmail.com',
+  email: 'reynoldtmashininga@gmail.com',
+  phone: '+263775975479',
   whatsapp: '263775975479', // Without + or spaces
   github: 'https://github.com',
   linkedin: 'https://www.linkedin.com/in/reynold-mashininga-16ab45318',

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import { Navbar, Footer, BackgroundBlobs, BackToTopButton } from './components';
 import { HomePage } from './pages/HomePage';
 import { ExperiencePage } from './pages/ExperiencePage';
@@ -10,11 +11,11 @@ import { ContactPage } from './pages/ContactPage';
 function App() {
   return (
     <Router>
-      <div className="relative bg-slate-900 text-white min-h-screen flex flex-col overflow-x-hidden">
+      <div className="app-shell">
         <BackgroundBlobs />
-        <div className="relative z-10 flex flex-col min-h-screen">
+        <div className="app-inner">
           <Navbar />
-          <main className="flex-grow">
+          <main className="page-main">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/experience" element={<ExperiencePage />} />

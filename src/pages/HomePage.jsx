@@ -1,191 +1,172 @@
 import { useNavigate } from 'react-router-dom';
-import { CTAButton, Section, SectionHeading } from '../components';
-import { strengths, projects, personalInfo, targetRoles } from '../content';
-
-const whatIDo = [
-  {
-    icon: '🌐',
-    title: 'Web Development',
-    desc: 'Building responsive websites and web applications with React, Python/Django, and PHP.',
-    tint: 'from-blue-500/20 to-blue-500/5',
-    ring: 'group-hover:shadow-glow-blue',
-    link: 'text-blue-300 hover:text-blue-200',
-  },
-  {
-    icon: '🎨',
-    title: 'Graphic Design',
-    desc: 'Designing branding, UI mockups, and social media graphics that communicate clearly.',
-    tint: 'from-purple-500/20 to-purple-500/5',
-    ring: 'group-hover:shadow-glow-purple',
-    link: 'text-purple-300 hover:text-purple-200',
-  },
-  {
-    icon: '🖥️',
-    title: 'IT Support',
-    desc: 'Troubleshooting hardware and software issues, managing networks, and keeping systems running.',
-    tint: 'from-teal-500/20 to-teal-500/5',
-    ring: 'group-hover:shadow-glow-cyan',
-    link: 'text-teal-300 hover:text-teal-200',
-  },
-  {
-    icon: '📈',
-    title: 'Sales & Marketing',
-    desc: 'Building customer relationships, running digital campaigns, and turning leads into results.',
-    tint: 'from-amber-500/20 to-amber-500/5',
-    ring: 'group-hover:shadow-[0_0_40px_-8px_rgba(245,158,11,0.45)]',
-    link: 'text-amber-300 hover:text-amber-200',
-  },
-];
-
-const roleAccents = ['border-blue-500/40 text-blue-300', 'border-purple-500/40 text-purple-300', 'border-teal-500/40 text-teal-300', 'border-amber-500/40 text-amber-300'];
+import { projects, personalInfo } from '../content';
 
 export function HomePage() {
   const navigate = useNavigate();
-
-  const handleContact = () => {
-    navigate('/contact');
-  };
-
-  const handleViewWork = () => {
-    navigate('/projects');
-  };
-
   const featured = projects.slice(0, 3);
 
   return (
-    <div className="min-h-full">
-      {/* Hero Section */}
-      <Section className="bg-grid py-32">
-        <div className="text-center space-y-8 animate-fade-in">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Hi, I'm <span className="text-gradient">Reynold</span>
-            </h1>
+    <div className="portfolio-page">
+      <section className="hero-panel">
+        <div className="hero-topbar">
+          <div className="brand-mark">
+            Web Designer
+            <span>Digital Creator</span>
+          </div>
+          <div className="availability-pill">
+            Available for freelance
+            <span className="pill-dot" aria-hidden="true" />
+          </div>
+        </div>
 
-            {/* Target Roles */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {targetRoles.map((role, idx) => (
-                <span
-                  key={idx}
-                  className={`px-4 py-1.5 glass border rounded-full text-sm font-semibold hover:-translate-y-0.5 hover:shadow-glow-sm transition-all duration-300 ${roleAccents[idx % roleAccents.length]}`}
-                >
-                  {role}
-                </span>
-              ))}
+        <div className="hero-layout">
+          <div className="hero-copy-wrap">
+            <div className="hero-backdrop" aria-hidden="true">
+              PORTFOLIO
             </div>
 
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              {personalInfo.bio}
-            </p>
-            <p className="text-lg text-blue-300 font-medium">{personalInfo.tagline}</p>
+            <div className="hero-copy">
+              <p className="hello-tag">Hello, I&apos;m</p>
+              <h1>
+                REYNOLD
+                <span>MASHINGA</span>
+              </h1>
+              <p className="role-line">WEB DESIGNER &amp; UI/UX CREATOR</p>
+
+              <div className="hero-bio-box">
+                <p>
+                  I design and build stylish, user-focused web experiences that combine creativity with strategy.
+                  Passionate about clean design, smooth interactions, and attention to detail.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Strengths */}
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
-            {strengths.map((item, idx) => (
-              <span key={idx} className="flex items-center space-x-1">
-                <span className="text-emerald-400">✓</span>
-                <span>{item}</span>
-              </span>
+          <div className="portrait-frame">
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+              alt="Portrait of Reynold"
+            />
+          </div>
+
+          <div className="hero-stats">
+            <div className="stat-card accent">
+              <span className="stat-emoji">✦</span>
+              <p>
+                Turning ideas
+                <br />
+                into digital experiences.
+              </p>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-block">
+                <strong>3+</strong>
+                <span>Years Experience</span>
+              </div>
+              <div className="stat-block">
+                <strong>40+</strong>
+                <span>Projects Completed</span>
+              </div>
+              <div className="stat-block">
+                <strong>20+</strong>
+                <span>Happy Clients</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="projects-panel">
+        <div className="section-header">
+          <h2>SELECTED PROJECTS</h2>
+          <button type="button" onClick={() => navigate('/projects')}>
+            VIEW ALL PROJECTS <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div className="feature-grid">
+          {featured.map((project, index) => (
+            <article key={project.id} className="project-card" onClick={() => navigate('/projects')}>
+              <div className="project-image-wrap">
+                <img src={project.image} alt={project.title} />
+              </div>
+
+              <div className="project-copy">
+                <div className="project-header">
+                  <span className="project-label">{project.category}</span>
+                  <span className="project-number">{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <h3>{project.title}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="detail-grid">
+        <div className="info-panel education-panel">
+          <h2>EDUCATION &amp; SKILLS</h2>
+
+          <div className="edu-stack">
+            <div className="edu-item">
+              <h3>B.Sc. in Visual Communication Design</h3>
+              <span>2020 – 2023</span>
+            </div>
+            <div className="edu-item">
+              <h3>UI/UX Design Certification</h3>
+              <span>2023</span>
+            </div>
+          </div>
+
+          <div className="skills-list">
+            {['Web Design', 'UI/UX', 'Figma', 'Photoshop', 'Illustrator', 'React', 'Tailwind', 'HTML/CSS'].map((skill) => (
+              <span key={skill}>{skill}</span>
             ))}
           </div>
+        </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <CTAButton onClick={handleViewWork} variant="primary" className="px-8 py-4 text-lg">
-              View My Work
-            </CTAButton>
-            <CTAButton onClick={handleContact} variant="outline" className="px-8 py-4 text-lg">
-              Get In Touch
-            </CTAButton>
+        <div className="info-panel process-panel">
+          <h2>WORK PROCESS</h2>
+          <ol className="process-list">
+            <li><span>01</span><p>Understand goals, audience, and project requirements.</p></li>
+            <li><span>02</span><p>Plan structure, wireframes, and the right visual direction.</p></li>
+            <li><span>03</span><p>Create polished UI concepts with a strong focus on usability.</p></li>
+            <li><span>04</span><p>Build responsive interfaces and refine the user experience.</p></li>
+            <li><span>05</span><p>Deliver a final product with testing, polish, and performance in mind.</p></li>
+          </ol>
+        </div>
+
+        <div className="quote-panel">
+          <div className="quote-mark">“</div>
+          <p>
+            Good design is not just how it looks, but how it works.
+          </p>
+          <span>Reynold</span>
+        </div>
+      </section>
+
+      <section className="cta-panel">
+        <div className="cta-copy">
+          <h2>LET&apos;S WORK TOGETHER</h2>
+          <p>
+            I&apos;m currently open for freelance work and collaborative projects. Let&apos;s create something meaningful.
+          </p>
+        </div>
+
+        <div className="contact-list">
+          <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+          <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a>
+          <a href={personalInfo.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+
+        <div className="cta-visual" aria-hidden="true">
+          <div className="device-panel">
+            <div className="screen" />
+            <div className="base" />
           </div>
         </div>
-      </Section>
-
-      {/* What I Do */}
-      <Section>
-        <SectionHeading
-          title="What I Do"
-          subtitle="The areas I bring skills and experience to"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {whatIDo.map((item, idx) => (
-            <div
-              key={idx}
-              className={`group space-y-4 p-8 rounded-xl glass gradient-border bg-gradient-to-br ${item.tint} transition-all duration-300 hover:-translate-y-1 ${item.ring}`}
-            >
-              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300 inline-block">{item.icon}</div>
-              <h3 className="text-2xl font-bold text-white">{item.title}</h3>
-              <p className="text-slate-300">{item.desc}</p>
-              <button
-                onClick={() => navigate('/experience')}
-                className={`${item.link} font-semibold mt-4 inline-flex items-center gap-1`}
-              >
-                See My Skills <span className="transition-transform group-hover:translate-x-1">→</span>
-              </button>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Featured Projects */}
-      <Section>
-        <SectionHeading
-          title="Featured Projects"
-          subtitle="A few things I've built"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featured.map((project) => (
-            <div
-              key={project.id}
-              className="glass gradient-border rounded-xl overflow-hidden hover:shadow-glow-sm hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
-              onClick={() => navigate('/projects')}
-            >
-              <div className="h-40 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6">
-                <div className="text-sm text-blue-400 font-semibold mb-2">{project.category}</div>
-                <h4 className="font-bold text-white mb-2">{project.title}</h4>
-                <p className="text-slate-400 text-sm mb-4">{project.description}</p>
-                <span className="text-blue-400 group-hover:text-blue-300 font-semibold inline-flex items-center gap-1">
-                  View Details <span className="transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <CTAButton onClick={() => navigate('/projects')} variant="secondary">
-            View All Projects
-          </CTAButton>
-        </div>
-      </Section>
-
-      {/* CTA Section */}
-      <Section>
-        <div className="relative overflow-hidden rounded-3xl bg-brand-gradient shadow-glow-blue px-8 py-16 text-center space-y-6">
-          <div className="bg-blob w-72 h-72 -top-10 -left-10 bg-white/10" />
-          <div className="bg-blob w-72 h-72 -bottom-10 -right-10 bg-white/10" />
-          <div className="relative z-10 space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Let's work together
-            </h2>
-            <p className="text-xl text-blue-50 max-w-2xl mx-auto">
-              I'm open to new opportunities. Reach out and let's talk about how I can contribute to your team.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton onClick={handleContact} variant="white" className="px-8 py-4 text-lg">
-                Get In Touch
-              </CTAButton>
-            </div>
-          </div>
-        </div>
-      </Section>
+      </section>
     </div>
   );
 }

@@ -60,7 +60,7 @@ Message: ${formData.message}
 
       {/* Contact Section */}
       <Section>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
           {/* Contact Info Cards */}
           <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-blue transition-all duration-300">
             <div className="text-4xl mb-4">📧</div>
@@ -70,6 +70,17 @@ Message: ${formData.message}
             </a>
             <div className="mt-3">
               <CopyButton value={personalInfo.email} label="Copy email" />
+            </div>
+          </div>
+
+          <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-sm transition-all duration-300">
+            <div className="text-4xl mb-4">📱</div>
+            <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
+            <a href={`tel:${personalInfo.phone}`} className="text-emerald-300 hover:text-white">
+              {personalInfo.phone}
+            </a>
+            <div className="mt-3">
+              <CopyButton value={personalInfo.phone} label="Copy number" />
             </div>
           </div>
 
