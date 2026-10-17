@@ -44,7 +44,7 @@ export function HomePage() {
 
           <div className="portrait-frame">
             <img
-              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+              src="/portfolio-portrait.jpg"
               alt="Portrait of Reynold"
             />
           </div>
