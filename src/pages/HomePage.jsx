@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { projects, personalInfo } from '../content';
+import { education, projects, personalInfo } from '../content';
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -87,7 +87,12 @@ export function HomePage() {
 
         <div className="feature-grid">
           {featured.map((project, index) => (
-            <article key={project.id} className="project-card" onClick={() => navigate('/projects')}>
+            <article
+              key={project.id}
+              className="project-card"
+              style={{ animationDelay: `${index * 100}ms` }}
+              onClick={() => navigate('/projects')}
+            >
               <div className="project-image-wrap">
                 <img src={project.image} alt={project.title} />
               </div>
@@ -109,14 +114,18 @@ export function HomePage() {
           <h2>EDUCATION &amp; SKILLS</h2>
 
           <div className="edu-stack">
-            <div className="edu-item">
-              <h3>B.Sc. in Visual Communication Design</h3>
-              <span>2020 – 2023</span>
-            </div>
-            <div className="edu-item">
-              <h3>UI/UX Design Certification</h3>
-              <span>2023</span>
-            </div>
+            {education.map((item, index) => (
+              <article className="edu-item" key={item.degree} style={{ animationDelay: `${index * 90}ms` }}>
+                <span className="edu-index">0{index + 1}</span>
+                <div>
+                  <h3>{item.degree}</h3>
+                  <div className="edu-meta">
+                    <span>{item.institution}</span>
+                    <span className="edu-type">{item.period}</span>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
 
           <div className="skills-list">

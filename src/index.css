@@ -2,14 +2,15 @@
 @config "../tailwind.config.js";
 
 :root {
-  color-scheme: dark;
-  --surface: #111315;
-  --surface-raised: #191b1e;
-  --text-primary: #f3f1ef;
-  --text-secondary: #a9a6a3;
-  --accent: #b7655d;
-  --accent-light: #cf8177;
-  --accent-dark: #914a45;
+  color-scheme: light;
+  --surface: #ffffff;
+  --surface-raised: #f5f8f5;
+  --text-primary: #17241b;
+  --text-secondary: #5c6c60;
+  --accent: #1f7a4d;
+  --accent-light: #2f8a5c;
+  --accent-dark: #155b3b;
+  --accent-soft: #e8f3eb;
 }
 
 /* Global Animations */
@@ -64,8 +65,8 @@ html {
 }
 
 body {
-  background: #090a0c;
-  color: #f3f1ef;
+  background: #f7f9f7;
+  color: var(--text-primary);
 }
 
 /* Custom scrollbar */
@@ -74,16 +75,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #111315;
+  background: #eef3ee;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #b7655d, #914a45);
+  background: linear-gradient(180deg, #2f8a5c, #155b3b);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #cf8177, #a5534d);
+  background: linear-gradient(180deg, #49a774, #1f7a4d);
 }
 
 /* Remove default focus outline but keep accessibility */
@@ -96,13 +97,13 @@ a:focus {
 /* Focus visible for keyboard navigation */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #cf8177;
+  outline: 2px solid #2f8a5c;
   outline-offset: 2px;
 }
 
 /* Selection styling */
 ::selection {
-  background-color: #914a45;
+  background-color: #1f7a4d;
   color: white;
 }
 
@@ -110,22 +111,22 @@ a:focus-visible {
 
 /* Glass panel: frosted, translucent surface used for cards/nav/forms */
 .glass {
-  background: rgba(25, 27, 30, 0.78);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(34, 65, 45, 0.1);
 }
 
 .glass-strong {
-  background: rgba(17, 19, 21, 0.96);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(34, 65, 45, 0.12);
 }
 
 /* Gradient text for headings/accents */
 .text-gradient {
-  background: linear-gradient(135deg, #f2eeeb 0%, #d4a09a 58%, #b7655d 100%);
+  background: linear-gradient(135deg, #155b3b 0%, #1f7a4d 58%, #68a77a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -142,7 +143,7 @@ a:focus-visible {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(183,101,93,0.56), rgba(207,129,119,0.34), rgba(145,74,69,0.46));
+  background: linear-gradient(135deg, rgba(31,122,77,0.42), rgba(104,167,122,0.3), rgba(21,91,59,0.34));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -166,12 +167,83 @@ a:focus-visible {
 
 /* Subtle dotted grid backdrop */
 .bg-grid {
-  background-image: radial-gradient(rgba(207, 129, 119, 0.09) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(31, 122, 77, 0.1) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 /* Shimmer sweep used on skeleton/badge hover */
 .shimmer-bg {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  background: linear-gradient(90deg, transparent, rgba(31,122,77,0.08), transparent);
   background-size: 200% 100%;
+}
+
+.app-shell .text-white:not(.bg-brand-gradient):not(.bg-accent-dark) {
+  color: var(--text-primary);
+}
+
+.app-shell .bg-brand-gradient.text-white,
+.app-shell .bg-accent-dark.text-white {
+  color: #fff;
+}
+
+.app-shell .bg-brand-gradient .text-white,
+.app-shell .bg-accent-dark .text-white,
+.app-shell .cta-panel .text-white {
+  color: #fff;
+}
+
+.app-shell [class~="border-white/10"] {
+  border-color: rgba(34, 65, 45, 0.12);
+}
+
+.app-shell [class~="border-white/30"] {
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.app-shell [class~="bg-white/5"] {
+  background-color: rgba(31, 122, 77, 0.045);
+}
+
+.app-shell [class~="bg-white/10"] {
+  background-color: rgba(31, 122, 77, 0.075);
+}
+
+.app-shell [class~="hover:text-white"]:hover {
+  color: var(--text-primary);
+}
+
+.app-shell [class~="hover:bg-white/5"]:hover {
+  background-color: rgba(31, 122, 77, 0.07);
+}
+
+.app-shell input,
+.app-shell select,
+.app-shell textarea {
+  color: var(--text-primary);
+  border-color: rgba(34, 65, 45, 0.16);
+}
+
+.app-shell input::placeholder,
+.app-shell textarea::placeholder {
+  color: #718075;
+}
+
+.app-shell option {
+  color: var(--text-primary);
+  background: #fff;
+}
+
+.app-shell .gradient-border::before {
+  background: linear-gradient(135deg, rgba(31,122,77,0.45), rgba(104,167,122,0.3), rgba(21,91,59,0.35));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

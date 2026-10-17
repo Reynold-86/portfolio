@@ -59,9 +59,9 @@ export function Navbar() {
           {/* Logo */}
           <button
             onClick={() => navigate('/')}
-            className="flex items-center space-x-2 font-bold text-xl text-white hover:text-accent-light transition-colors"
+            className="flex items-center gap-3 font-bold text-xl text-white hover:text-accent-light transition-colors"
           >
-            <span className="text-2xl">💻</span>
+            <span className="brand-monogram" aria-hidden="true">RM</span>
             <span className="text-gradient">Reynold</span>
           </button>
 
@@ -171,7 +171,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <span className="text-2xl">💻</span>
+              <span className="brand-monogram" aria-hidden="true">RM</span>
               <span className="font-bold text-white text-lg">Reynold Mashininga</span>
             </div>
             <p className="text-slate-400 text-sm">{personalInfo.bio}</p>

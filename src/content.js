@@ -31,13 +31,24 @@ export const experience = [
   // },
 ];
 
-// TODO: Replace with your real education history.
 export const education = [
   {
-    degree: 'Add your degree / qualification',
-    institution: 'Add your school or university',
-    period: 'Add year(s)',
-    description: 'Add relevant coursework, focus area, or achievements.',
+    degree: 'BSc in Information Systems',
+    institution: 'Bachelor of Science',
+    period: 'Degree',
+    description: 'Information Systems',
+  },
+  {
+    degree: 'Google Cybersecurity Certificate',
+    institution: 'Google',
+    period: 'Certification',
+    description: 'Cybersecurity',
+  },
+  {
+    degree: 'Google IT Support Certificate',
+    institution: 'Google',
+    period: 'Certification',
+    description: 'IT Support',
   },
 ];
 
@@ -96,7 +107,7 @@ export const projects = [
     id: 2,
     title: 'Budget & Expense Tracker',
     category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f5ae4e8cf13?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop',
     description: 'A personal finance app for tracking income and expenses.',
     problem: 'Users struggled to categorize spending and understand their financial patterns.',
     solution: 'Built a Django web app with real-time charts, category tagging, and CSV export.',

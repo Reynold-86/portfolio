@@ -112,9 +112,9 @@ Message: ${formData.message}
           <SectionHeading title="Send me a Message" center={true} />
 
           {submitted ? (
-            <div className="glass border border-green-500/30 rounded-xl p-8 text-center animate-fade-in">
+            <div className="glass border border-accent/30 rounded-xl p-8 text-center animate-fade-in">
               <div className="text-5xl mb-4">✓</div>
-              <h3 className="text-2xl font-bold text-green-400 mb-2">Message Sent!</h3>
+              <h3 className="text-2xl font-bold text-accent mb-2">Message Sent!</h3>
               <p className="text-slate-300 mb-6">
                 Thank you for reaching out! I'll get back to you as soon as possible.
               </p>

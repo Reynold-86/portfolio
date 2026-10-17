@@ -40,10 +40,9 @@ export function AboutPage() {
             </div>
           </div>
 
-          {/* Profile Image Placeholder */}
           <div className="flex justify-center">
-            <div className="w-80 h-80 bg-brand-gradient rounded-2xl flex items-center justify-center shadow-glow-blue animate-float">
-              <span className="text-8xl">💻</span>
+            <div className="about-portrait">
+              <img src="/portfolio-portrait.jpg" alt="Portrait of Reynold" />
             </div>
           </div>
         </div>
