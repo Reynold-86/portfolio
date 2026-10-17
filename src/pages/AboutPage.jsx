@@ -72,7 +72,7 @@ export function AboutPage() {
           <div className="bg-blob w-72 h-72 -bottom-10 -right-10 bg-white/10" />
           <div className="relative z-10 space-y-6">
             <h2 className="text-4xl font-bold text-white">Let's talk about opportunities</h2>
-            <p className="text-xl text-blue-50 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-200 max-w-2xl mx-auto">
               If my background sounds like a fit for your team, I'd love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

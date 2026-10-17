@@ -65,7 +65,7 @@ Message: ${formData.message}
           <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-blue transition-all duration-300">
             <div className="text-4xl mb-4">📧</div>
             <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-            <a href={`mailto:${personalInfo.email}`} className="text-blue-300 hover:text-white break-all">
+            <a href={`mailto:${personalInfo.email}`} className="text-accent-light hover:text-white break-all">
               {personalInfo.email}
             </a>
             <div className="mt-3">
@@ -76,7 +76,7 @@ Message: ${formData.message}
           <div className="glass gradient-border rounded-xl p-8 hover:-translate-y-1 hover:shadow-glow-sm transition-all duration-300">
             <div className="text-4xl mb-4">📱</div>
             <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
-            <a href={`tel:${personalInfo.phone}`} className="text-emerald-300 hover:text-white">
+            <a href={`tel:${personalInfo.phone}`} className="text-accent-light hover:text-white">
               {personalInfo.phone}
             </a>
             <div className="mt-3">
@@ -91,7 +91,7 @@ Message: ${formData.message}
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-300 hover:text-white"
+              className="text-accent-light hover:text-white"
             >
               Connect with me
             </a>
@@ -123,7 +123,7 @@ Message: ${formData.message}
                   setSubmitted(false);
                   navigate('/');
                 }}
-                className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all"
+                className="px-6 py-2 bg-accent-dark text-white rounded-lg hover:bg-accent transition-all"
               >
                 Back to Home
               </button>

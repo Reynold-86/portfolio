@@ -80,32 +80,32 @@ export function ProjectsPage() {
               />
 
               <div>
-                <h3 className="text-sm font-semibold text-blue-400 mb-1">Category</h3>
+                <h3 className="text-sm font-semibold text-accent-light mb-1">Category</h3>
                 <p className="text-white">{selectedItem.category}</p>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-blue-400 mb-2">Description</h3>
+                <h3 className="text-sm font-semibold text-accent-light mb-2">Description</h3>
                 <p className="text-slate-300">{selectedItem.description}</p>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-blue-400 mb-2">The Problem</h3>
+                <h3 className="text-sm font-semibold text-accent-light mb-2">The Problem</h3>
                 <p className="text-slate-300">{selectedItem.problem}</p>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-blue-400 mb-2">My Solution</h3>
+                <h3 className="text-sm font-semibold text-accent-light mb-2">My Solution</h3>
                 <p className="text-slate-300">{selectedItem.solution}</p>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-blue-400 mb-3">Technologies Used</h3>
+                <h3 className="text-sm font-semibold text-accent-light mb-3">Technologies Used</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedItem.tools.map((tool, idx) => (
                     <span
                       key={idx}
-                      className="bg-blue-600/15 border border-blue-500/30 text-blue-300 px-3 py-1 rounded-full text-sm"
+                      className="bg-accent/10 border border-accent/30 text-accent-light px-3 py-1 rounded-full text-sm"
                     >
                       {tool}
                     </span>
@@ -153,7 +153,7 @@ export function ProjectsPage() {
           <div className="bg-blob w-72 h-72 -bottom-10 -right-10 bg-white/10" />
           <div className="relative z-10 space-y-6">
             <h2 className="text-4xl font-bold text-white">Like what you see?</h2>
-            <p className="text-xl text-blue-50">
+            <p className="text-xl text-slate-200">
               Let's talk about how I could bring this kind of work to your team.
             </p>
             <CTAButton onClick={() => navigate('/contact')} variant="white" className="px-8 py-4 text-lg">

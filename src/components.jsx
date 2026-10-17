@@ -6,9 +6,9 @@ import { personalInfo } from './content.js';
 export function BackgroundBlobs() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-      <div className="bg-blob w-96 h-96 -top-20 -left-20 bg-blue-600/25 animate-blob" />
-      <div className="bg-blob w-96 h-96 top-1/3 -right-20 bg-purple-600/20 animate-blob" style={{ animationDelay: '4s' }} />
-      <div className="bg-blob w-96 h-96 bottom-0 left-1/3 bg-cyan-500/15 animate-blob" style={{ animationDelay: '8s' }} />
+      <div className="bg-blob w-96 h-96 -top-20 -left-20 bg-accent/10 animate-blob" />
+      <div className="bg-blob w-96 h-96 top-1/3 -right-20 bg-accent-dark/10 animate-blob" style={{ animationDelay: '4s' }} />
+      <div className="bg-blob w-96 h-96 bottom-0 left-1/3 bg-accent-light/5 animate-blob" style={{ animationDelay: '8s' }} />
     </div>
   );
 }
@@ -27,7 +27,7 @@ export function BackToTopButton() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
-      className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-strong shadow-glow-blue text-blue-300 hover:text-white hover:bg-blue-600/80 transition-all duration-300 flex items-center justify-center ${
+      className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-strong shadow-glow-blue text-accent-light hover:text-white hover:bg-accent-dark transition-all duration-300 flex items-center justify-center ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
@@ -59,7 +59,7 @@ export function Navbar() {
           {/* Logo */}
           <button
             onClick={() => navigate('/')}
-            className="flex items-center space-x-2 font-bold text-xl text-white hover:text-blue-400 transition-colors"
+            className="flex items-center space-x-2 font-bold text-xl text-white hover:text-accent-light transition-colors"
           >
             <span className="text-2xl">💻</span>
             <span className="text-gradient">Reynold</span>
@@ -95,7 +95,7 @@ export function Navbar() {
                 href={personalInfo.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-blue-500/50 text-blue-300 rounded-lg hover:bg-blue-600/20 hover:border-blue-400 transition-all font-medium text-sm"
+                className="px-4 py-2 border border-accent/50 text-accent-light rounded-lg hover:bg-accent/10 hover:border-accent-light transition-all font-medium text-sm"
               >
                 Resume
               </a>
@@ -148,7 +148,7 @@ export function Navbar() {
                 href={personalInfo.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center mt-3 px-4 py-2 border border-blue-500/50 text-blue-300 rounded-lg hover:bg-blue-600/20 transition-all font-medium"
+                className="block w-full text-center mt-3 px-4 py-2 border border-accent/50 text-accent-light rounded-lg hover:bg-accent/10 transition-all font-medium"
               >
                 Resume
               </a>
@@ -181,9 +181,9 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="/" className="hover:text-blue-400 transition-colors">Home</a></li>
-              <li><a href="/about" className="hover:text-blue-400 transition-colors">About</a></li>
-              <li><a href="/projects" className="hover:text-blue-400 transition-colors">Projects</a></li>
+              <li><a href="/" className="hover:text-accent-light transition-colors">Home</a></li>
+              <li><a href="/about" className="hover:text-accent-light transition-colors">About</a></li>
+              <li><a href="/projects" className="hover:text-accent-light transition-colors">Projects</a></li>
             </ul>
           </div>
 
@@ -191,9 +191,9 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">Experience</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Skills</a></li>
-              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Work Experience</a></li>
-              <li><a href="/experience" className="hover:text-blue-400 transition-colors">Education</a></li>
+              <li><a href="/experience" className="hover:text-accent-light transition-colors">Skills</a></li>
+              <li><a href="/experience" className="hover:text-accent-light transition-colors">Work Experience</a></li>
+              <li><a href="/experience" className="hover:text-accent-light transition-colors">Education</a></li>
             </ul>
           </div>
 
@@ -243,10 +243,10 @@ export function Footer() {
 export function CTAButton({ children, onClick, variant = 'primary', className = '' }) {
   const variants = {
     primary: 'bg-brand-gradient text-white hover:shadow-glow-blue',
-    secondary: 'bg-gradient-to-r from-cyan-600 to-emerald-600 text-white hover:shadow-glow-cyan',
-    outline: 'glass border border-blue-500/40 text-blue-300 hover:text-white hover:border-blue-400 hover:bg-blue-600/10',
+    secondary: 'bg-brand-gradient text-white hover:shadow-glow-blue',
+    outline: 'glass border border-accent/40 text-accent-light hover:text-white hover:border-accent-light hover:bg-accent/10',
     // For use on top of a colored/gradient banner background
-    white: 'bg-white text-blue-600 hover:bg-blue-50 hover:shadow-2xl',
+    white: 'bg-[#f3f1ef] text-accent-dark hover:bg-white hover:shadow-xl',
     ghost: 'bg-white/10 backdrop-blur border border-white/30 text-white hover:bg-white/20',
   };
 
@@ -327,7 +327,7 @@ export function ContactForm({ onSubmit }) {
     setFormData({ name: '', email: '', reason: '', message: '' });
   };
 
-  const fieldClass = "w-full px-4 py-3 bg-white/5 text-white border border-white/10 rounded-lg placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 focus:bg-white/[0.07] transition-all";
+  const fieldClass = "w-full px-4 py-3 bg-white/5 text-white border border-white/10 rounded-lg placeholder-slate-500 focus:outline-none focus:border-accent-light focus:ring-2 focus:ring-accent/25 focus:bg-white/[0.07] transition-all";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -397,7 +397,7 @@ export function CopyButton({ value, label = 'Copy' }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:border-blue-400/50 transition-all duration-300"
+      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:border-accent/50 transition-all duration-300"
     >
       <span>{copied ? '✓' : '📋'}</span>
       <span>{copied ? 'Copied!' : label}</span>
@@ -408,13 +408,13 @@ export function CopyButton({ value, label = 'Copy' }) {
 // Accordion item — click to expand/collapse
 export function AccordionItem({ question, answer, isOpen, onToggle }) {
   return (
-    <div className="glass rounded-xl overflow-hidden transition-all duration-300 hover:border-blue-400/30">
+    <div className="glass rounded-xl overflow-hidden transition-all duration-300 hover:border-accent/30">
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
       >
         <h4 className="font-bold text-white">{question}</h4>
-        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-white/5 text-blue-300 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
+        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-white/5 text-accent-light transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
           +
         </span>
       </button>

@@ -2,13 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { Section, SectionHeading, CTAButton } from '../components';
 import { skillCategories, experience, education } from '../content';
 
-const accentColors = [
-  { text: 'text-blue-400', pill: 'border-blue-500/30 hover:border-blue-400/60 hover:shadow-glow-blue' },
-  { text: 'text-purple-400', pill: 'border-purple-500/30 hover:border-purple-400/60 hover:shadow-glow-purple' },
-  { text: 'text-teal-400', pill: 'border-teal-500/30 hover:border-teal-400/60 hover:shadow-glow-cyan' },
-  { text: 'text-amber-400', pill: 'border-amber-500/30 hover:border-amber-400/60 hover:shadow-[0_0_20px_-6px_rgba(245,158,11,0.4)]' },
-  { text: 'text-pink-400', pill: 'border-pink-500/30 hover:border-pink-400/60 hover:shadow-[0_0_20px_-6px_rgba(236,72,153,0.4)]' },
-];
+const accentColor = {
+  text: 'text-accent-light',
+  pill: 'border-accent/30 hover:border-accent-light/60 hover:shadow-glow-sm',
+};
 
 export function ExperiencePage() {
   const navigate = useNavigate();
@@ -29,11 +26,10 @@ export function ExperiencePage() {
       <Section>
         <SectionHeading title="Skills" subtitle="Across the areas I'm open to working in" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((group, gIdx) => {
-            const accent = accentColors[gIdx % accentColors.length];
+          {skillCategories.map((group) => {
             return (
               <div key={group.category} className="glass gradient-border rounded-xl p-6 hover:-translate-y-1 transition-all duration-300">
-                <h3 className={`text-lg font-bold ${accent.text} mb-4 flex items-center gap-2`}>
+                <h3 className={`text-lg font-bold ${accentColor.text} mb-4 flex items-center gap-2`}>
                   <span>{group.icon}</span>
                   <span>{group.category}</span>
                 </h3>
@@ -41,7 +37,7 @@ export function ExperiencePage() {
                   {group.items.map((skill, idx) => (
                     <span
                       key={idx}
-                      className={`text-xs font-medium text-slate-200 bg-white/5 border rounded-full px-3 py-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 ${accent.pill}`}
+                      className={`text-xs font-medium text-slate-200 bg-white/5 border rounded-full px-3 py-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 ${accentColor.pill}`}
                     >
                       {skill}
                     </span>
@@ -61,7 +57,7 @@ export function ExperiencePage() {
             {experience.map((job, idx) => (
               <div key={idx} className="glass gradient-border rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:gap-8 hover:-translate-y-1 hover:shadow-glow-sm transition-all duration-300">
                 <div className="flex-shrink-0 sm:w-32">
-                  <div className="text-sm font-bold text-blue-400">{job.period}</div>
+                  <div className="text-sm font-bold text-accent-light">{job.period}</div>
                 </div>
                 <div className="flex-grow">
                   <h3 className="text-xl font-bold text-white mb-1">{job.role}</h3>
@@ -73,7 +69,7 @@ export function ExperiencePage() {
           </div>
         ) : (
           <div className="text-center text-slate-400 max-w-xl mx-auto glass rounded-xl p-8">
-            <p>I'm early in my career and building my professional experience through personal and freelance projects — see my <button onClick={() => navigate('/projects')} className="text-blue-400 hover:text-blue-300 font-semibold">Projects page</button> for examples of my work.</p>
+            <p>I'm early in my career and building my professional experience through personal and freelance projects — see my <button onClick={() => navigate('/projects')} className="text-accent-light hover:text-accent font-semibold">Projects page</button> for examples of my work.</p>
           </div>
         )}
       </Section>
@@ -85,7 +81,7 @@ export function ExperiencePage() {
           {education.map((edu, idx) => (
             <div key={idx} className="glass gradient-border rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:gap-8 hover:-translate-y-1 hover:shadow-glow-sm transition-all duration-300">
               <div className="flex-shrink-0 sm:w-32">
-                <div className="text-sm font-bold text-blue-400">{edu.period}</div>
+                <div className="text-sm font-bold text-accent-light">{edu.period}</div>
               </div>
               <div className="flex-grow">
                 <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
@@ -123,7 +119,7 @@ export function ExperiencePage() {
           <div className="bg-blob w-72 h-72 -bottom-10 -right-10 bg-white/10" />
           <div className="relative z-10 space-y-6">
             <h2 className="text-4xl font-bold text-white">Interested in working together?</h2>
-            <p className="text-xl text-blue-50 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-200 max-w-2xl mx-auto">
               I'd love to hear about the role and how I could contribute.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

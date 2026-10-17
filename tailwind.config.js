@@ -7,6 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        accent: {
+          DEFAULT: '#b7655d',
+          light: '#cf8177',
+          dark: '#914a45',
+        },
         slate: {
           50: '#f8fafc',
           100: '#f1f5f9',
@@ -23,15 +28,15 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'brand-gradient': 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%)',
-        'mesh-1': 'radial-gradient(at 20% 20%, rgba(59,130,246,0.35) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(139,92,246,0.3) 0px, transparent 50%), radial-gradient(at 0% 80%, rgba(6,182,212,0.25) 0px, transparent 50%)',
+        'brand-gradient': 'linear-gradient(135deg, #b7655d 0%, #a5534d 55%, #914a45 100%)',
+        'mesh-1': 'radial-gradient(at 20% 20%, rgba(183,101,93,0.18) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(207,129,119,0.12) 0px, transparent 50%), radial-gradient(at 0% 80%, rgba(145,74,69,0.14) 0px, transparent 50%)',
       },
       boxShadow: {
-        'glow-blue': '0 0 40px -8px rgba(59,130,246,0.45)',
-        'glow-purple': '0 0 40px -8px rgba(139,92,246,0.45)',
-        'glow-cyan': '0 0 40px -8px rgba(34,211,238,0.4)',
-        'glow-sm': '0 0 20px -6px rgba(59,130,246,0.35)',
-        'glass': '0 8px 32px 0 rgba(0,0,0,0.37)',
+        'glow-blue': '0 8px 28px -10px rgba(183,101,93,0.3)',
+        'glow-purple': '0 8px 28px -10px rgba(183,101,93,0.3)',
+        'glow-cyan': '0 8px 28px -10px rgba(183,101,93,0.3)',
+        'glow-sm': '0 8px 24px -10px rgba(183,101,93,0.26)',
+        'glass': '0 12px 36px 0 rgba(0,0,0,0.25)',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out',
@@ -69,8 +74,8 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px -8px rgba(59,130,246,0.5)' },
-          '50%': { boxShadow: '0 0 32px -4px rgba(139,92,246,0.6)' },
+          '0%, 100%': { boxShadow: '0 8px 24px -10px rgba(183,101,93,0.26)' },
+          '50%': { boxShadow: '0 8px 30px -8px rgba(183,101,93,0.34)' },
         },
       },
     },
