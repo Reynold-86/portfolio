@@ -3,7 +3,8 @@ import { education, projects, personalInfo } from '../content';
 
 export function HomePage() {
   const navigate = useNavigate();
-  const featured = projects.slice(0, 3);
+  const graphicFeature = projects.find((project) => project.category === 'Graphic Design');
+  const featured = [...projects.slice(0, 2), ...(graphicFeature ? [graphicFeature] : [])];
 
   return (
     <div className="portfolio-page">
@@ -77,11 +78,11 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="projects-panel">
+      <section className="projects-panel graphic-showcase">
         <div className="section-header">
           <h2>SELECTED PROJECTS</h2>
           <button type="button" onClick={() => navigate('/projects')}>
-            VIEW ALL PROJECTS <span aria-hidden="true">→</span>
+            SEE ALL PROJECTS <span aria-hidden="true">→</span>
           </button>
         </div>
 
