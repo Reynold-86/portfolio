@@ -67,6 +67,16 @@ html {
 body {
   background: #f7f9f7;
   color: var(--text-primary);
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Custom scrollbar */
