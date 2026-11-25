@@ -5,6 +5,9 @@ import { education, projects, personalInfo } from '../content';
 export function HomePage() {
   const navigate = useNavigate();
   const portraitRef = useRef(null);
+  const laptopSectionRef = useRef(null);
+  const laptopVideoRef = useRef(null);
+  const laptopProgressRef = useRef(null);
   const [portraitInView, setPortraitInView] = useState(false);
   const graphicFeature = projects.find((project) => project.category === 'Graphic Design');
   const featured = [...projects.slice(0, 2), ...(graphicFeature ? [graphicFeature] : [])];
@@ -21,6 +24,55 @@ export function HomePage() {
 
     observer.observe(portrait);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = laptopSectionRef.current;
+    const video = laptopVideoRef.current;
+    const progressBar = laptopProgressRef.current;
+    if (!section || !video || !progressBar) return undefined;
+
+    let frame = 0;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const syncVideoToScroll = () => {
+      frame = 0;
+      if (prefersReducedMotion.matches) return;
+
+      const bounds = section.getBoundingClientRect();
+      if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return;
+
+      const scrollRange = section.offsetHeight - window.innerHeight;
+      const progress = scrollRange > 0
+        ? Math.min(1, Math.max(0, -bounds.top / scrollRange))
+        : 0;
+
+      progressBar.style.transform = `scaleX(${progress})`;
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && Number.isFinite(video.duration)) {
+        const targetTime = progress * video.duration;
+        if (!video.seeking && Math.abs(video.currentTime - targetTime) > 0.04) {
+          video.currentTime = targetTime;
+        }
+      }
+    };
+
+    const scheduleSync = () => {
+      if (!frame) frame = window.requestAnimationFrame(syncVideoToScroll);
+    };
+
+    window.addEventListener('scroll', scheduleSync, { passive: true });
+    window.addEventListener('resize', scheduleSync);
+    video.addEventListener('loadedmetadata', scheduleSync);
+    video.addEventListener('seeked', scheduleSync);
+    scheduleSync();
+
+    return () => {
+      window.removeEventListener('scroll', scheduleSync);
+      window.removeEventListener('resize', scheduleSync);
+      video.removeEventListener('loadedmetadata', scheduleSync);
+      video.removeEventListener('seeked', scheduleSync);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -95,6 +147,44 @@ export function HomePage() {
               <p>Good work starts with asking better questions.</p>
             </div>
             <span className="hero-side-note">A multidisciplinary practice<br />in design and technology</span>
+          </div>
+        </div>
+      </section>
+
+      <section
+        ref={laptopSectionRef}
+        className="laptop-scroll-section"
+        aria-label="Scroll through a laptop teardown animation"
+      >
+        <div className="laptop-scroll-sticky">
+          <div className="laptop-scroll-copy">
+            <p className="section-kicker">01 / Object study</p>
+            <h2>Every layer.<br /><span>In its place.</span></h2>
+            <p className="laptop-scroll-description">
+              A closer look at the details that make technology work. Scroll to take it apart.
+            </p>
+            <div className="laptop-scroll-progress" aria-hidden="true">
+              <span ref={laptopProgressRef} />
+            </div>
+            <p className="laptop-scroll-hint"><span aria-hidden="true">↓</span> Keep scrolling</p>
+          </div>
+
+          <div className="laptop-video-frame">
+            <video
+              ref={laptopVideoRef}
+              className="laptop-scroll-video"
+              muted
+              playsInline
+              preload="auto"
+              tabIndex="-1"
+              aria-label="Laptop components separating into an exploded view"
+            >
+              <source src="/laptop-dismantling.mp4" type="video/mp4" />
+            </video>
+            <div className="laptop-video-caption" aria-hidden="true">
+              <span>Disassembly sequence</span>
+              <span>RM / 001</span>
+            </div>
           </div>
         </div>
       </section>
